@@ -1,0 +1,5 @@
+# ignored files list
+
+cmake-build-debug/
+.idea/
+
