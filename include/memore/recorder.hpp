@@ -11,6 +11,7 @@
 #include <iostream>
 #include <chrono>
 
+namespace memore {
 class Recorder {
 public:
     Recorder() = default;
@@ -25,5 +26,6 @@ private:
     std::string collection_name;
     mongocxx::client connection{};
 };
+}
 
 #endif //PROJECT_RECORDER_HPP
