@@ -4,15 +4,13 @@
 mongocxx::instance instance{};
 /****************************************************************************/
 
-using namespace std;
-using namespace memore;
 using namespace bsoncxx::builder::stream;
 using namespace std::chrono;
 using bsoncxx::document::value;
 using mongocxx::uri;
 using mongocxx::client;
 
-Recorder::Recorder(const string &module, const string& db_name, const string& collection_name) {
+memore::Recorder::Recorder(const std::string &module, const std::string& db_name, const std::string& collection_name) {
     this->module_name = module;
     this->db_name = db_name;
     this->collection_name = collection_name;
@@ -22,7 +20,7 @@ Recorder::Recorder(const string &module, const string& db_name, const string& co
     this->connection = client(uri);
 }
 
-void Recorder::addData(const map<string, string>& data) {
+void memore::Recorder::addData(const std::map<std::string, std::string>& data) {
 
     milliseconds ms = duration_cast<milliseconds>(system_clock::now().time_since_epoch());
 
@@ -31,8 +29,9 @@ void Recorder::addData(const map<string, string>& data) {
     document builder{};
 
     auto in_doc = builder
+            << "count" << this->counter;
             << "module" << this->module_name
-            << "timestamp" << to_string(ms.count())
+            << "timestamp" << std::to_string(ms.count())
             << "data" << open_document;
 
     for (auto&& e : data) {
@@ -42,4 +41,5 @@ void Recorder::addData(const map<string, string>& data) {
 
     value doc = builder << finalize;
     collection.insert_one(builder.view());
+    this->counter++;
 }
