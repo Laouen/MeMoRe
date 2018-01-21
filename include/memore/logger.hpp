@@ -6,8 +6,6 @@ namespace memore {
     template<typename TIME>
     struct coordinator_formatter {
 
-        TIME _current_time;
-
         static std::string log_info_init(const TIME &t, const std::string &model_id) {
             std::ostringstream oss;
             oss << "{";
@@ -15,7 +13,6 @@ namespace memore {
             oss << "model:" << model_id << ",";
             oss << "time:" << t;
             oss << "}";
-            _current_time = t;
             return oss.str();
         };
 
@@ -26,11 +23,10 @@ namespace memore {
             oss << "model:" << model_id << ",";
             oss << "time:" << t;
             oss << "}";
-            _current_time = t;
             return oss.str();
         };
 
-        static std::string log_routing_collect(const std::string &model_id) {
+        static std::string log_routing_collect(const TIME &t, const std::string &model_id) {
             return "";
         };
 
@@ -39,28 +35,24 @@ namespace memore {
             std::ostringstream oss;
             oss << "{";
             oss << "log:advance_simulation_time,";
-            oss << "Coordinator for model ";
             oss << "model:" << model_id << ",";
             oss << "from_time:" << from << ",";
-            oss << "to_time:" << to << ",";
+            oss << "to_time:" << to;
             oss << "}";
-            _current_time = to;
             return oss.str();
         };
 
-        static std::string log_routing_ic_collect(const std::string &model_id) {
+        static std::string log_routing_ic_collect(const TIME &t, const std::string &model_id) {
             return "";
         };
 
-        static std::string log_routing_eic_collect(const std::string &model_id) {
+        static std::string log_routing_eic_collect(const TIME &t, const std::string &model_id) {
             return "";
         };
     };
 
     template <typename TIME>
     struct simulator_formatter {
-
-        TIME _current_time;
 
         static std::string log_info_init(const TIME& t, const std::string& model_id) {
             std::ostringstream oss;
@@ -69,17 +61,16 @@ namespace memore {
             oss << "model:" << model_id << ",";
             oss << "time:" << t;
             oss << "}";
-            _current_time = t;
             return oss.str();
         }
 
-        static std::string log_state(const std::string& model_id, const std::string& model_state) {
+        static std::string log_state(const TIME &t, const std::string& model_id, const std::string& model_state) {
             std::ostringstream oss;
             oss << "{";
-            oss << "log:state";
+            oss << "log:state,";
             oss << "model:" << model_id << ",";
-            oss << "time:" << _current_time<< ",";
-            oss << "state:" << model_state;
+            oss << "state:" << model_state  << ",";
+            oss << "time:" << t;
             oss << "}";
             return oss.str();
         };
@@ -91,16 +82,15 @@ namespace memore {
             oss << "model:" << model_id << ",";
             oss << "time:" << t;
             oss << "}";
-            _current_time = t;
             return oss.str();
         };
 
-        static std::string log_messages_collect(const std::string& model_id, const std::string& outbox) {
+        static std::string log_messages_collect(const TIME &t, const std::string& model_id, const std::string& outbox) {
             std::ostringstream oss;
             oss << "{";
-            oss << "log:collect_output";
+            oss << "log:collect_output,";
             oss << "model:" << model_id << ",";
-            oss << "time:" << _current_time << ",";
+            oss << "time:" << t << ",";
             oss << "outbox:" << outbox;
             oss << "}";
             return oss.str();
@@ -112,9 +102,8 @@ namespace memore {
             oss << "log:advance_simulation_time,";
             oss << "model:" << model_id << ",";
             oss << "from_time:" << from << ",";
-            oss << "to_time:" << to << ",";
+            oss << "to_time:" << to;
             oss << "}";
-            _current_time = to;
             return oss.str();
         };
 
@@ -123,7 +112,8 @@ namespace memore {
             oss << "{";
             oss << "log:elapsed_time";
             oss << "model:" << model_id << ",";
-            oss << "time:" << (to - from);
+            oss << "elapsed:" << (to - from)  << ",";
+            oss << "time:" << to;
             oss << "}";
             return oss.str();
         };

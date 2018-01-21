@@ -43,3 +43,21 @@ void memore::Recorder::addData(const std::map<std::string, std::string>& data) {
     collection.insert_one(builder.view());
     this->counter++;
 }
+
+void addData(const std::string& data) {
+    milliseconds ms = duration_cast<milliseconds>(system_clock::now().time_since_epoch());
+
+    std::ostringstream oss;
+
+    oss << "{";
+    oss << "\"count\":\"" << this->counter << "\",";
+    oss << "\"module\":\"" << this->module_name << "\",";
+    oss << "\"timestamp\":\"" << std::to_string(ms.count()) << "\",";
+    oss << "\"data\":\"" << data;
+    oss << "}";
+    bsoncxx::from_json =  oss.str();
+
+    auto collection = this->connection[this->db_name][this->collection_name];
+    collection.insert_one(builder.view());
+    this->counter++;
+}

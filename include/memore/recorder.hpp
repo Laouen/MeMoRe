@@ -18,6 +18,7 @@ public:
     Recorder(const std::string &module, const std::string& db_name, const std::string& collection_name);
 
     void addData(const std::map<std::string, std::string>& data);
+    void addData(const std::string& data);
 
 private:
     unsigned int counter;
