@@ -3,6 +3,7 @@
 
 #include <bsoncxx/builder/stream/document.hpp>
 #include <bsoncxx/json.hpp>
+#include <bsoncxx/builder/core.hpp>
 
 #include <mongocxx/client.hpp>
 #include <mongocxx/instance.hpp>
@@ -17,7 +18,6 @@ public:
     Recorder() = default;
     Recorder(const std::string &module, const std::string& db_name, const std::string& collection_name);
 
-    void addData(const std::map<std::string, std::string>& data);
     void addData(const std::string& data);
 
 private:
