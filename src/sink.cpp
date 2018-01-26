@@ -11,7 +11,9 @@ memore::sink(
 {}
 
 std::sink& operator<<(std::sink& s, const std::string& metric) {
-    _r.addData(metric);
-    std::cout << metric;
+    if (metric != "") {
+        _r.addData(metric);
+        std::cout << metric;
+    }
     return s;
 }
