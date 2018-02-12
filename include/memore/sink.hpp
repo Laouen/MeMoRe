@@ -7,11 +7,11 @@
 namespace memore {
     class sink {
 
-        Recorder _r;
+        Recorder _r;     
 
     public:
         sink() = default;
-        sink(const std::string &module, const std::string& db_name, const std::string& collection_name, bool console);
+        sink(const std::string &module, const std::string& db_name, const std::string& collection_name);
     };
 }
 
