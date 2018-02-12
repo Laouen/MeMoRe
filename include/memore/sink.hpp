@@ -5,6 +5,7 @@
 #include <iostream>
 
 namespace memore {
+    
     class sink {
 
         Recorder _r;     
@@ -12,9 +13,11 @@ namespace memore {
     public:
         sink() = default;
         sink(const std::string &module, const std::string& db_name, const std::string& collection_name);
+
+        void add_data(const std::string& metric);
     };
 }
 
-std::ostream& operator<<(std::ostream& os, memore::sink& s);
+memore::sink& operator<<(memore::sink& os, const std::string& metric);
 
 #endif //PMGBP_PDEVS_SINK_HPP
