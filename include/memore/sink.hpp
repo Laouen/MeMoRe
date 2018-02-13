@@ -19,5 +19,6 @@ namespace memore {
 }
 
 memore::sink& operator<<(memore::sink& os, const std::string& metric);
+memore::sink& operator<<(memore::sink& s, std::ostream& (*os)(std::ostream&));
 
 #endif //PMGBP_PDEVS_SINK_HPP

@@ -1,8 +1,7 @@
 #include <memore/recorder.hpp>
 #include <sstream>
+#include <iostream>
 
-/**************** unique required and available instance ********************/
-mongocxx::instance instance{};
 /****************************************************************************/
 
 using namespace bsoncxx::builder::stream;
@@ -33,11 +32,13 @@ void memore::Recorder::addData(const std::string& data) {
 
     oss << "{";
     oss << "\"uuid\":\"" << boost::uuids::to_string(_uuid) << "\",";
-    oss << "\"count\":\"" << _counter << "\",";
+    oss << "\"count\":" << _counter << ",";
     oss << "\"module\":\"" << _module_name << "\",";
-    oss << "\"timestamp\":\"" << std::to_string(ms.count()) << "\",";
+    oss << "\"timestamp\":" << std::to_string(ms.count()) << ",";
     oss << "\"data\":" << data;
     oss << "}";
+
+    std::cout << oss.str() << std::endl;
 
     auto in_doc = bsoncxx::from_json(oss.str());
 

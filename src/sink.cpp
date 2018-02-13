@@ -15,7 +15,10 @@ void memore::sink::add_data(const std::string& metric) {
 memore::sink& operator<<(memore::sink& s, const std::string& metric) {
     if (metric != "") {
         s.add_data(metric);
-        std::cout << metric;
     }
+    return s;
+}
+
+memore::sink& operator<<(memore::sink& s, std::ostream& (*os)(std::ostream&)) {
     return s;
 }
