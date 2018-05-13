@@ -75,7 +75,7 @@ namespace memore {
                 oss << "\"to_port\":\"" << to_port << "\",";
                 oss << "\"from_messages\": [";
                 for (const auto& m : from_messages) {
-                    oss << "\"" << m << "\"";
+                    oss << m;
                     if (m != from_messages.back()) {
                         oss << ",";
                     }
@@ -83,7 +83,7 @@ namespace memore {
                 oss << "]";
                 oss << "\"to_messages\": [";
                 for (const auto& m : to_messages) {
-                    oss << "\"" << m << "\"";
+                    oss << m;
                     if (m != to_messages.back()) {
                         oss << ",";
                     }
@@ -108,7 +108,7 @@ namespace memore {
                 oss << "{";
                 oss << "\"log\":\"state\",";
                 oss << "\"model\":\"" << model_id << "\",";
-                oss << "\"state\":\"" << model_state  << "\",";
+                oss << "\"state\":" << model_state << ",";
                 oss << "\"time\":\"" << t << "\"";
                 oss << "}";
                 return oss.str();
@@ -129,8 +129,8 @@ namespace memore {
                 oss << "{";
                 oss << "\"log\":\"collect_output\",";
                 oss << "\"model\":\"" << model_id << "\",";
-                oss << "\"time\":\"" << t << "\",";
-                oss << "\"outbox\":\"" << outbox << "\"";
+                oss << "\"time\":\"" << t << "\"";
+                //oss << "\"outbox\":\"" << outbox << "\"";
                 oss << "}";
                 return oss.str();
             };

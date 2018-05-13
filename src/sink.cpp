@@ -1,6 +1,6 @@
 #include <memore/sink.hpp>
 
-memore::sink(
+memore::sink::sink(
         const std::string& module,
         const std::string& db_name,
         const std::string& collection_name
@@ -8,10 +8,17 @@ memore::sink(
         _r(module, db_name, collection_name)
 {}
 
-std::sink& operator<<(std::sink& s, const std::string& metric) {
+void memore::sink::add_data(const std::string& metric) {
+	_r.addData(metric);
+}
+
+memore::sink& operator<<(memore::sink& s, const std::string& metric) {
     if (metric != "") {
-        _r.addData(metric);
-        std::cout << metric;
+        s.add_data(metric);
     }
+    return s;
+}
+
+memore::sink& operator<<(memore::sink& s, std::ostream& (*os)(std::ostream&)) {
     return s;
 }
