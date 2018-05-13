@@ -22,6 +22,7 @@ namespace memore {
         Recorder() = default;
         Recorder(const std::string &module, const std::string& db_name, const std::string& collection_name);
 
+        void newCollection(const std::string& collection_name);
         void addData(const std::string& data);
 
     private:

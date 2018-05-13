@@ -26,6 +26,10 @@ memore::Recorder::Recorder(
     _connection = client(uri);
 }
 
+void memore::newCollection(const std::string& collection_name) {
+    _collection_name = collection_name;
+}
+
 void memore::Recorder::addData(const std::string& data) {
     milliseconds ms = duration_cast<milliseconds>(system_clock::now().time_since_epoch());
 
