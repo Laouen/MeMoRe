@@ -11,13 +11,12 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -Wl,-rpath,/usr/local/lib")
 
 find_package(libmongocxx REQUIRED)
 find_package(libbsoncxx REQUIRED)
-include_directories(${LIBMONGOCXX_INCLUDE_DIR})
-include_directories(${LIBBSONCXX_INCLUDE_DIR})
 include_directories(/usr/local/include/mongocxx/v_noabi)
 include_directories(/usr/local/include/bsoncxx/v_noabi)
 include_directories(/usr/local/include/libmongoc-1.0)
 include_directories(/usr/local/include/libbson-1.0)
 include_directories(/usr/local/lib)
+
 
 find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 include_directories(include ${Boost_INCLUDE_DIRS})
