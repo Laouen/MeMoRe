@@ -25,11 +25,11 @@ memore::Recorder::Recorder(
     _connection = client(uri);
 }
 
-void memore::newCollection(const std::string& collection_name) {
+void memore::Recorder::new_collection(const std::string& collection_name) {
     _collection_name = collection_name;
 }
 
-void memore::Recorder::addData(const std::string& data) {
+void memore::Recorder::add_data(const std::string& data) {
     milliseconds ms = duration_cast<milliseconds>(system_clock::now().time_since_epoch());
 
     std::ostringstream oss;

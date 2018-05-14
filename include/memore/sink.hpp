@@ -14,6 +14,7 @@ namespace memore {
         sink() = default;
         sink(const std::string &module, const std::string& db_name, const std::string& collection_name);
 
+        void new_collection(const std::string& collection_name);
         void add_data(const std::string& metric);
     };
 }

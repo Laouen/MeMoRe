@@ -8,8 +8,12 @@ memore::sink::sink(
         _r(module, db_name, collection_name)
 {}
 
+void memore::sink::new_collection(const std::string& collection_name) {
+    _r.new_collection(collection_name);
+}
+
 void memore::sink::add_data(const std::string& metric) {
-	_r.addData(metric);
+	_r.add_data(metric);
 }
 
 memore::sink& operator<<(memore::sink& s, const std::string& metric) {
