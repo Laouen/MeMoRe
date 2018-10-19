@@ -42,7 +42,7 @@ void memore::Recorder::add_data(const std::string& data) {
     oss << "\"data\":" << data;
     oss << "}";
 
-    std::cout << oss.str() << std::endl;
+    //std::cout << oss.str() << std::endl;
 
     auto in_doc = bsoncxx::from_json(oss.str());
 
